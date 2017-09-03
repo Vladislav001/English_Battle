@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="css/stylePersonalArea.css">
 <% layout('layout/page') -%>
 <% block('title') -%>
@@ -6,6 +5,7 @@
 <h1><b>English Battle</b></h1>
 
 <table cellspacing="0">
+  <h3><b>Topics</b></h3>
 <% for(var i=0; i<topics.length; i++) { %>
 <tr>
    <td><%=[i+1]%></td>
@@ -16,8 +16,8 @@
 
 <div class="card-row clearfix">
 
-          <div class="col-md-6">
-          <div class="card">
+<div class="col-md-6">
+<div class="card">
 <form class="form-addNewTest" name="cabinet_addNewTopic">
   <h4>Topic</h4>
   <div class="form-group">
@@ -35,30 +35,8 @@
 
 <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new topic</button>
   </div>
-
     </div>
-
-
-
-
-
-    <div class="col-md-6">
-      <div class="card">
-
-
-
-    <div class="form-group">
-      <label class="btn-addNewTest">
-        <!-- <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new test</button> -->
-        <span class="help-block error"></span>
-        </label>
         </form>
-
-</div>
-  </div>
-
-</div>
-
 
 <script>
 // Клиентский код //
@@ -69,7 +47,7 @@ $('.error', form).html('');
 $(":submit", form).button("loading");
 // Этот логин, email, пароль отправляются на сервер
 $.ajax({
-  url: "/addNewTest", // роут: require('./registration').post
+  url: "/addNewTopic", // роут: require('./registration').post
   method: "POST",
   data: form.serialize(),
   complete: function() {

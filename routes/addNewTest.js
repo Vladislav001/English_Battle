@@ -1,52 +1,28 @@
-// Модуль добавление нового теста
-var HttpError = require('../error').HttpError;
-var AuthError = require('../models/user').AuthError;
 var firebase = require('firebase');
 
-
 exports.post = function(req, res, next) {
-  // Получаем данные, которые передал посетитель
-    var nameTopic = req.body.nameTopic;
-    var nameConcretTopic = req.body.nameConcretTopic;
-    var nameTest = req.body.nameTest;
 
-    var topicFirst;
+  var nameTest = req.body.nameTest;
+  var countQuestion = req.body.countQuestion;
+  var lvlTest = req.body.lvlTest;
+  var timeForAnswer = req.body.timeForAnswer;
 
-    // Проверим имеется ли такой тест в БД
-    var refCheckTopic = firebase.database().ref("topics");
-    refCheckTopic.orderByChild("name_topic").equalTo(nameTopic).limitToFirst(1).on("child_added", function(snapshot) {
-    topicFirst = snapshot.child("topic").val();
-    });
+  firebase.auth().onAuthStateChanged(user => {
+   if (user) {
 
-  if (nameTopic != topicFirst) {
-  //Генерируем уникальный ключ
-  var userIdTopic =  firebase.app().database().ref().push().getKey();
+  // var refTopic = firebase.database().ref("topics/" + req.params.idTag);
+   var refNewTest = firebase.database().ref("topics/" + req.params.idTag + "/" + nameTest);
 
-  var ref = firebase.app().database().ref();
-
-  var refNewTopic = ref.child('topics/' + userIdTopic);
-  var refNewTopic = refNewTopic.set({
-  name_topic: nameTopic
+     var refNewTest = refNewTest.set({
+     count_question: countQuestion,
+     lvl_test: lvlTest,
+     time_for_answer: timeForAnswer
+     });
+    }
   });
 
+  console.log(refNewTest + " refNewTest");
 
-  // 
-  // // Формируем узлы с номерами тестов и соответствующими под-узлами
-  // var refNewConcretTopic = ref.child('topics/' + userIdTopic + "/" + nameConcretTopic);
-  //
-  //
-  // var refNewTest = ref.child('topics/' + userIdTopic + "/" + nameConcretTopic + "/" + nameTest);
-  // var refNewTest = refNewTest.set({
-  // lvl: lvl,
-  // time_for_answer: timeForAnswer,
-  // count_question: countQuestion
-  // });
-
-  // var refNewTestSettings = refNewTest.child("/settings"); //
-
-// Без этого не обновляет страницу
-res.redirect("/personalArea");
-} else {
-    return next(new HttpError(403, "This test already exists")); //403 - отказ регистрации
-  }
+//Для обновления страницы - костыль
+//res.redirect("/personalArea");
 };

@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="css/stylePersonalArea.css">
+<% layout('layout/page') -%>
+<% block('title') -%>
+
+<h1><b>English Battle</b></h1>
+
+
+<div class="card-row clearfix">
+
+<div class="col-md-6">
+<div class="card">
+<form class="form-addNewTest" name="cabinet_addNewTest">
+  <h4>Topic: <%=nameTopic%></h4>
+  <h4>Test</h4>
+  <div class="form-group">
+    <input name="nameTest" type="text" class="form-control" id="input-loginNewUser" placeholder="Name topic" required>
+  </div>
+  <h4>Count questions</h4>
+  <div class="form-group">
+    <input name="countQuestion" type="number" min="1" value="1" class="form-control" id="input-loginNewUser" required>
+  </div>
+  <h4>Lvl</h4>
+  <div class="form-group">
+    <SELECT name="lvlTest" type="text" class="form-control" id="input-genderNewUser" required>
+  <OPTION>A1</OPTION>
+  <OPTION>A2</OPTION>
+  <OPTION>B1</OPTION>
+  <OPTION>B2</OPTION>
+  <OPTION>C1</OPTION>
+  <OPTION>C2</OPTION>
+</SELECT>
+  </div>
+
+  <h4>Time for answer (in seconds)</h4>
+  <div class="form-group">
+    <input name="timeForAnswer" type="number" min="5" value="5" class="form-control" id="input-loginNewUser" required>
+  </div>
+
+<button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new topic</button>
+  </div>
+    </div>
+        </form>
+
+
+
+<script>
+// Клиентский код //
+// Человек вводит логин, email,
+$(document.forms['cabinet_addNewTest']).on('submit', function() {
+var form = $(this);
+$('.error', form).html('');
+$(":submit", form).button("loading");
+// Этот логин, email, пароль отправляются на сервер
+$.ajax({
+  url: "/addNewTest", // роут: require('./registration')
+  method: "POST",
+  data: form.serialize(),
+  complete: function() {
+    $(":submit", form).button("reset");
+  },
+  statusCode: {
+    // если ответ сервера 200 - перенаправляем человека в личный кабинет(успешно создали нового пользователя)
+    200: function() {
+      //form.html("Student Added").addClass('alert-success');
+      location.reload();
+    },
+    // если 403 - высвечивается ошибка(уже есть такой пользователь)
+    403: function(jqXHR) {
+      var error = JSON.parse(jqXHR.responseText);
+      $('.error', form).html(error.message);
+    }
+  }
+});
+return false;
+// location.reload();
+});
+</script>

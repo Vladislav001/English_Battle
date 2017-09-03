@@ -1,30 +1,33 @@
 // Модуль настройки топика
 var firebase = require('firebase');
 
-exports.post = function(req, res, next) {
-
-  var nameTest = req.body.nameTest;
-
-  firebase.auth().onAuthStateChanged(user => {
-   if (user) {
-    // var refStudents = firebase.database().ref("students/" + req.params.idTag);
-    //
-    //  var refStudents = refStudents.update({
-    //    login: updateLoginStudent,
-    //    password: updatePasswordStudent,
-    //    name: updateNameStudent,
-    //    age: updateAgeStudent,
-    //    gender: updateGenderStudent,
-    //    current_test: updateCurrentTest,
-    //    current_result_web: updateCurrentResult
-    //  });
-
-    }
-  });
-
-//Для обновления страницы - костыль
-res.redirect("/personalArea");
-};
+// exports.post = function(req, res, next) {
+//
+//   var nameTest = req.body.nameTest;
+//   var countQuestion = req.body.countQuestion;
+//   var lvlTest = req.body.lvlTest;
+//   var timeForAnswer = req.body.timeForAnswer;
+//
+//   firebase.auth().onAuthStateChanged(user => {
+//    if (user) {
+//     // var refStudents = firebase.database().ref("students/" + req.params.idTag);
+//     //
+//     //  var refStudents = refStudents.update({
+//     //    login: updateLoginStudent,
+//     //    password: updatePasswordStudent,
+//     //    name: updateNameStudent,
+//     //    age: updateAgeStudent,
+//     //    gender: updateGenderStudent,
+//     //    current_test: updateCurrentTest,
+//     //    current_result_web: updateCurrentResult
+//     //  });
+//
+//     }
+//   });
+//
+// //Для обновления страницы - костыль
+// res.redirect("/personalArea");
+// };
 
 
 
@@ -48,7 +51,7 @@ exports.get = function(req, res) {
 
 
            res.render("topicSettings", {
-
+             nameTopic: nameTopic
            });
 
 
