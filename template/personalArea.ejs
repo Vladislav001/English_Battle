@@ -1,0 +1,94 @@
+
+<link rel="stylesheet" href="css/stylePersonalArea.css">
+<% layout('layout/page') -%>
+<% block('title') -%>
+
+<h1><b>English Battle</b></h1>
+
+<table cellspacing="0">
+<% for(var i=0; i<topics.length; i++) { %>
+<tr>
+   <td><%=[i+1]%></td>
+   <td><a href="<%=topics[i]%>"><%=nameTopic[i]%></a></td>
+</tr>
+  <% } %>
+  </table>
+
+<div class="card-row clearfix">
+
+          <div class="col-md-6">
+          <div class="card">
+<form class="form-addNewTest" name="cabinet_addNewTopic">
+  <h4>Topic</h4>
+  <div class="form-group">
+    <input name="nameTopic" type="text" class="form-control" id="input-loginNewUser" placeholder="Name topic" required>
+  </div>
+  <!-- <h4>Concret topic</h4>
+  <div class="form-group">
+    <input name="nameConcretTopic" type="text" class="form-control" id="input-loginNewUser" placeholder="Concret name topic" required>
+  </div>
+  <h4>Test</h4>
+  <div class="form-group">
+    <input name="nameTest" type="text" class="form-control" id="input-loginNewUser" placeholder="Name test" required>
+  </div> -->
+
+
+<button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new topic</button>
+  </div>
+
+    </div>
+
+
+
+
+
+    <div class="col-md-6">
+      <div class="card">
+
+
+
+    <div class="form-group">
+      <label class="btn-addNewTest">
+        <!-- <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new test</button> -->
+        <span class="help-block error"></span>
+        </label>
+        </form>
+
+</div>
+  </div>
+
+</div>
+
+
+<script>
+// Клиентский код //
+// Человек вводит логин, email,
+$(document.forms['cabinet_addNewTopic']).on('submit', function() {
+var form = $(this);
+$('.error', form).html('');
+$(":submit", form).button("loading");
+// Этот логин, email, пароль отправляются на сервер
+$.ajax({
+  url: "/addNewTest", // роут: require('./registration').post
+  method: "POST",
+  data: form.serialize(),
+  complete: function() {
+    $(":submit", form).button("reset");
+  },
+  statusCode: {
+    // если ответ сервера 200 - перенаправляем человека в личный кабинет(успешно создали нового пользователя)
+    200: function() {
+      //form.html("Student Added").addClass('alert-success');
+      location.reload();
+    },
+    // если 403 - высвечивается ошибка(уже есть такой пользователь)
+    403: function(jqXHR) {
+      var error = JSON.parse(jqXHR.responseText);
+      $('.error', form).html(error.message);
+    }
+  }
+});
+return false;
+// location.reload();
+});
+</script>
