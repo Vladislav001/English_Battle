@@ -4,6 +4,7 @@ exports.post = function(req, res, next) {
 
   var nameTest = req.body.nameTest;
   var countQuestion = req.body.countQuestion;
+  var countAnswers = req.body.countAnswers;
   var lvlTest = req.body.lvlTest;
   var timeForAnswer = req.body.timeForAnswer;
 
@@ -19,6 +20,7 @@ exports.post = function(req, res, next) {
      var refNewTest = refNewTest.set({
      name_test: nameTest,
      count_question: countQuestion,
+     count_answers_for_question: countAnswers,
      lvl_test: lvlTest,
      time_for_answer: timeForAnswer
      });

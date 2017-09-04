@@ -1,5 +1,4 @@
 // Модуль личного кабинета
-
 var firebase = require('firebase'); //https://metanit.com/web/nodejs/4.10.php
 
 
@@ -8,13 +7,9 @@ exports.get = function(req, res) {
   var topics = [];  // массив в котором будут храниться топики (ссылки)
   var nameTopic = []; // хранит имена топиков
 
-
   var unsubscribe = firebase.auth().onAuthStateChanged(user => {
     if (user) {
 
-      //trainer
-      //var userId = firebase.auth().currentUser.uid;
-      //var ref = firebase.database().ref("trainers/" + userId);
       var ref = firebase.app().database().ref();
 
       ref.once("value")

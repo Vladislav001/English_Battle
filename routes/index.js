@@ -10,7 +10,6 @@ module.exports = function(app) {
   app.post('/addNewTest/id:idTag', require('./addNewTest').post);
 
   app.get('/topic_settings/id:idTag', require('./topicSettings').get);
-
-  //app.get('/test_settings/id:idTag', require('./testSettings').get);
+  app.get('/test_settings/id:idTag', require('./testSettings').get);
 
 };

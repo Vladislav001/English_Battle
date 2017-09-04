@@ -2,8 +2,11 @@
 <% layout('layout/page') -%>
 <% block('title') -%>
 
-<h1><b>English Battle</b></h1>
-
+<h1><b><center>English Battle</center></b></h1>
+  <h4>Topic: <%=nameTopic%></h4>
+<div class="card-row clearfix">
+  <div class="col-md-6">
+  <div class="card">
 <table cellspacing="0">
   <h3><b>Tests</b></h3>
 <% for(var i=1; i<tests.length; i++) { %>
@@ -13,20 +16,24 @@
 </tr>
   <% } %>
   </table>
+</div>
+</div>
 
 
-<div class="card-row clearfix">
 <div class="col-md-6">
 <div class="card">
 <form class="form-addNewTest" name="cabinet_addNewTest">
-  <h4>Topic: <%=nameTopic%></h4>
   <h4>Test</h4>
   <div class="form-group">
-    <input name="nameTest" type="text" class="form-control" id="input-loginNewUser" placeholder="Name topic" required>
+    <input name="nameTest" type="text" class="form-control" id="input-loginNewUser" placeholder="Name test" required>
   </div>
   <h4>Count questions</h4>
   <div class="form-group">
     <input name="countQuestion" type="number" min="1" value="1" class="form-control" id="input-loginNewUser" required>
+  </div>
+  <h4>Count answers for question</h4>
+  <div class="form-group">
+    <input name="countAnswers" type="number" min="2" value="2" class="form-control" id="input-loginNewUser" required>
   </div>
   <h4>Lvl</h4>
   <div class="form-group">
@@ -49,7 +56,7 @@
   </div>
     </div>
         </form>
-
+  </div>
 
 
 <script>

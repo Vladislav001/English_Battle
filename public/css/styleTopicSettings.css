@@ -3,17 +3,21 @@
 	    border-color: #ffffff;
 }
 
-h1 b{
+h1 {
   font-size: 120px;
   font-family: serif;
   text-align: center;
   margin-top: 2%;
 }
 
+h3 b {
+	margin-left: 15%;
+}
+
 .clearfix {
 	  padding: 15px;
-	  margin-left: -9%;
-	  margin-top: -1%;
+	  margin-left: 0%;
+	  margin-top: 0%;
 }
 
 
@@ -21,10 +25,10 @@ h1 b{
 
 /*С ИНТЕРНЕТА */
 table {
-    border:1px solid #d3d3d3;
+    border:3px solid #d3d3d3;
     background:#fefefe;
-    width:60%;
-    margin-left: -5%; /* Обтекание по правому краю */
+    width: 50%;
+    margin-left: 4%; /* Обтекание по правому краю */
     -moz-border-radius:5px; /* FF1+ */
     -webkit-border-radius:5px; /* Saf3-4 */
     border-radius:5px;
@@ -33,7 +37,7 @@ table {
 }
 
 th, td {
-    padding:5px 12px 12px;
+    padding:3px 6px 10px;
     text-align:center;
 }
 
@@ -101,7 +105,7 @@ tr:last-child td.last {
   max-width: 380px;
   padding: 0px;
   margin: 0 auto;
-  margin-top: 2%;
+  margin-top: 5%;
 }
 
 .form-addNewTest .form-control {

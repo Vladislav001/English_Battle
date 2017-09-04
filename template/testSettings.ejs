@@ -1,33 +1,34 @@
-<link rel="stylesheet" href="css/stylePersonalArea.css">
+<link rel="stylesheet" href="css/styleTestSettings.css">
 <% layout('layout/page') -%>
 <% block('title') -%>
 
-<h1><b>English Battle</b></h1>
+<h1><b><center>English Battle</center></b></h1>
 
 <div class="card-row clearfix">
   <div class="col-md-6">
   <div class="card">
-<table cellspacing="0">
-  <h3><b>Topics</b></h3>
-<% for(var i=0; i<topics.length; i++) { %>
-<tr>
-   <td><%=[i+1]%></td>
-   <td><a href="<%=topics[i]%>"><%=nameTopic[i]%></a></td>
-</tr>
-  <% } %>
-  </table>
+
+    <form class="form-addNewTest" name="cabinet_addNewTopic">
+      <h4>Add questions</h4>
+
+      <% for(var i=0; i<countQuestion; i++) { %>
+      <div class="form-group">
+        <input name="nameQuestion" type="text" class="form-control" id="input-loginNewUser" placeholder="Name question" required>
+      </div>
+
+      <% } %>
+
+      <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new questions</button>
+        </form>
+
   </div>
 </div>
 
+
+
 <div class="col-md-6">
 <div class="card">
-<form class="form-addNewTest" name="cabinet_addNewTopic">
-  <h4>Add topic</h4>
-  <div class="form-group">
-    <input name="nameTopic" type="text" class="form-control" id="input-loginNewUser" placeholder="Name topic" required>
-  </div>
-  <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new topic</button>
-        </form>
+
   </div>
 </div>
 </div>
@@ -41,7 +42,7 @@ $('.error', form).html('');
 $(":submit", form).button("loading");
 // Этот логин, email, пароль отправляются на сервер
 $.ajax({
-  url: "/addNewTopic", // роут: require('./registration').post
+  url: "/addNewQuestions", // роут: require('./registration').post
   method: "POST",
   data: form.serialize(),
   complete: function() {
