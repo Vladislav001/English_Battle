@@ -10,19 +10,24 @@ exports.post = function(req, res, next) {
   firebase.auth().onAuthStateChanged(user => {
    if (user) {
 
-  // var refTopic = firebase.database().ref("topics/" + req.params.idTag);
-   var refNewTest = firebase.database().ref("topics/" + req.params.idTag + "/" + nameTest);
+   var refTopic = firebase.database().ref("topics/" + req.params.idTag);
+
+   //Генерируем уникальный ключ
+   var unicIdTest =  firebase.app().database().ref().push().getKey();
+   var refNewTest = refTopic.child(unicIdTest);
 
      var refNewTest = refNewTest.set({
+     name_test: nameTest,
      count_question: countQuestion,
      lvl_test: lvlTest,
      time_for_answer: timeForAnswer
      });
     }
+
+
   });
 
-  console.log(refNewTest + " refNewTest");
-
-//Для обновления страницы - костыль
-//res.redirect("/personalArea");
+//Для обновления страницы - костыль wtf
+//res.redirect("/topic_settings/" + req.params.idTag);
+res.redirect("/personalArea");
 };

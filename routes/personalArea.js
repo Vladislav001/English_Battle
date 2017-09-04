@@ -20,7 +20,7 @@ exports.get = function(req, res) {
       ref.once("value")
         .then(function(snapshot) {
           var refTopics = firebase.database().ref("topics");
-          refTopics.orderByChild("topics").on("child_added", function(snapshot) {
+          refTopics.orderByChild("topics/").on("child_added", function(snapshot) {
                   //console.log(snapshot.key);
                 topics.push("/topic_settings/id" + snapshot.key);
                 nameTopic.push(snapshot.child('name_topic').val());

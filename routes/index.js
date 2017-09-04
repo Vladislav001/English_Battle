@@ -7,8 +7,10 @@ module.exports = function(app) {
   app.post('/logout', require('./logout').post);
   app.get('/personalArea', require('./personalArea').get);
   app.post('/addNewTopic', require('./addNewTopic').post);
-  app.post('/addNewTest', require('./addNewTest').post);
+  app.post('/addNewTest/id:idTag', require('./addNewTest').post);
 
   app.get('/topic_settings/id:idTag', require('./topicSettings').get);
-  //app.post('/topic_settings/id:idTag', require('./topicSettings').post);
+
+  //app.get('/test_settings/id:idTag', require('./testSettings').get);
+
 };

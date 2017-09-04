@@ -1,38 +1,10 @@
 // Модуль настройки топика
 var firebase = require('firebase');
 
-// exports.post = function(req, res, next) {
-//
-//   var nameTest = req.body.nameTest;
-//   var countQuestion = req.body.countQuestion;
-//   var lvlTest = req.body.lvlTest;
-//   var timeForAnswer = req.body.timeForAnswer;
-//
-//   firebase.auth().onAuthStateChanged(user => {
-//    if (user) {
-//     // var refStudents = firebase.database().ref("students/" + req.params.idTag);
-//     //
-//     //  var refStudents = refStudents.update({
-//     //    login: updateLoginStudent,
-//     //    password: updatePasswordStudent,
-//     //    name: updateNameStudent,
-//     //    age: updateAgeStudent,
-//     //    gender: updateGenderStudent,
-//     //    current_test: updateCurrentTest,
-//     //    current_result_web: updateCurrentResult
-//     //  });
-//
-//     }
-//   });
-//
-// //Для обновления страницы - костыль
-// res.redirect("/personalArea");
-// };
-
-
-
 exports.get = function(req, res) {
 
+  var tests = [];  // массив в котором будут храниться тесты (ссылки)
+  var nameTest = []; // хранит имена топиков
 
   firebase.auth().onAuthStateChanged(user => {
    if (user) {
@@ -43,19 +15,20 @@ exports.get = function(req, res) {
       .then(function(snapshot) {
         var nameTopic = snapshot.child('name_topic').val();
 
-       //var link = "/" + currentTest + "/test_settings/id" + req.params.idTag;
+        refTopic.orderByChild("name_test").on("child_added", function(snapshotLinks) {
 
-      //  var refNumbersResults = refStudents.child("/student_state");
-      //  var refResultStudents = refStudents.child("tests/" + currentTest + "/results/" + currentResult);
-      //  var refCurrentQuestion = refStudents.child("/student_state");
-
+              tests.push("/test_settings/id" + snapshotLinks.key);
+              nameTest.push(snapshotLinks.child('name_test').val());
+            });
 
            res.render("topicSettings", {
-             nameTopic: nameTopic
+             id: snapshot.key,
+             nameTopic: nameTopic,
+
+             tests: tests,
+             nameTest: nameTest
+
            });
-
-
-
      });
     }
   });

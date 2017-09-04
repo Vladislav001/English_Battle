@@ -1,12 +1,21 @@
-<link rel="stylesheet" href="css/stylePersonalArea.css">
+<link rel="stylesheet" href="css/styleTopicSettings.css">
 <% layout('layout/page') -%>
 <% block('title') -%>
 
 <h1><b>English Battle</b></h1>
 
+<table cellspacing="0">
+  <h3><b>Tests</b></h3>
+<% for(var i=1; i<tests.length; i++) { %>
+<tr>
+   <td><%=[i]%></td>
+   <td><a href="<%=tests[i]%>"><%=nameTest[i]%></a></td>
+</tr>
+  <% } %>
+  </table>
+
 
 <div class="card-row clearfix">
-
 <div class="col-md-6">
 <div class="card">
 <form class="form-addNewTest" name="cabinet_addNewTest">
@@ -52,7 +61,7 @@ $('.error', form).html('');
 $(":submit", form).button("loading");
 // Этот логин, email, пароль отправляются на сервер
 $.ajax({
-  url: "/addNewTest", // роут: require('./registration')
+  url: "/addNewTest/id<%=id%>", // роут: require('./registration')
   method: "POST",
   data: form.serialize(),
   complete: function() {

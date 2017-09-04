@@ -18,6 +18,7 @@ exports.post = function(req, res, next) {
     topicFirst = snapshot.child("topic").val();
     });
 
+  // Не пашет!
   if (nameTopic != topicFirst) {
   //Генерируем уникальный ключ
   var userIdTopic =  firebase.app().database().ref().push().getKey();
