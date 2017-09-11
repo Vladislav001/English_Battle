@@ -8,6 +8,7 @@ module.exports = function(app) {
   app.get('/personalArea', require('./personalArea').get);
   app.post('/addNewTopic', require('./addNewTopic').post);
   app.post('/addNewTest/id:idTag', require('./addNewTest').post);
+  app.post('/addNewQuestions/id:idTag', require('./addNewQuestions').post);
 
   app.get('/topic_settings/id:idTag', require('./topicSettings').get);
   app.get('/test_settings/id:idTag', require('./testSettings').get);

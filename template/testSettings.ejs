@@ -15,7 +15,7 @@
       <div class="form-group">
         <input name="nameQuestion" type="text" class="form-control" id="input-loginNewUser" placeholder="Name question" required>
       </div>
-
+      
       <% } %>
 
       <button type="submit" class="btn btn-primary" data-loading-text="Sending..."id="addNewTest">Add new questions</button>
@@ -28,6 +28,12 @@
 
 <div class="col-md-6">
 <div class="card">
+
+  <!-- <% for(var i=0; i<countAnswersForQuestion; i++) { %>
+  <div class="form-group">
+    <input name="nameAnswer" type="text" class="form-control" id="input-loginNewUser" placeholder="Name answer" required>
+  </div>
+  <% } %> -->
 
   </div>
 </div>
@@ -42,7 +48,7 @@ $('.error', form).html('');
 $(":submit", form).button("loading");
 // Этот логин, email, пароль отправляются на сервер
 $.ajax({
-  url: "/addNewQuestions", // роут: require('./registration').post
+  url: "/addNewQuestions/id<%=id%>", // роут: require('./registration').post
   method: "POST",
   data: form.serialize(),
   complete: function() {

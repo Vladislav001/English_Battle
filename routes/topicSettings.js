@@ -28,7 +28,7 @@ exports.get = function(req, res) {
              tests: tests,
              nameTest: nameTest
 
-           });
+           });console.log(snapshot.key + " id");
      });
     }
   });

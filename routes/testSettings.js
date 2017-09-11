@@ -7,6 +7,7 @@ exports.get = function(req, res) {
   firebase.auth().onAuthStateChanged(user => {
    if (user) {
 
+     // ВНИМАНИЕ!!!
     var refTest = firebase.database().ref("topics/" + "-KtDYltAs6p2DUgnqHWM/" + req.params.idTag);
 
      refTest.once("value")
@@ -15,10 +16,12 @@ exports.get = function(req, res) {
         var countAnswersForQuestion = snapshot.child('count_answers_for_question').val();
 
            res.render("testSettings", {
+             id: snapshot.key,
+
              countQuestion: countQuestion,
              countAnswersForQuestion: countAnswersForQuestion
 
-           });   console.log(countQuestion + " countQuestion");
+           });   console.log(snapshot.key + " id");
             console.log(countAnswersForQuestion + " countAnswersForQuestion");
      });
    }
